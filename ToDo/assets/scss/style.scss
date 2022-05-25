@@ -24,22 +24,41 @@ body {
   // overflow: hidden;
 }
 
-.todo__header {
-  flex: 1;
+.todo__form {
+  display: flex;
+}
 
-  input[type=text] {
-    height: 50px;
-    width: 100%;
-    border: none;
-    outline: none;
-    padding: 0 20px;
-    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .05);
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+.todo__input {
+  height: 50px;
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  padding: 0 20px;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .05);
+  border-top-left-radius: 3px;
 
-    &:focus {
+  &:focus {
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .1);
+
+    &+.todo__button-add {
+
       box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .1);
     }
+  }
+}
+
+.todo__button-add {
+  height: 50px;
+  border: none;
+  border-top-right-radius: 3px;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .05);
+  padding: 0 20px;
+  background-color: rgb(58, 144, 201);
+  color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(69, 155, 212);
   }
 }
 
@@ -52,6 +71,10 @@ body {
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
+
+    &+.todo__item {
+      margin-top: 10px;
+    }
   }
 
   .todo__checkbox-wrapper {
@@ -72,7 +95,7 @@ body {
   .todo__checkbox {
     display: none;
 
-    &:checked + .todo__label {
+    &:checked+.todo__label {
       border-color: rgba(77, 197, 77, 0.775);
       border-width: 2px;
       // box-shadow: 0 0 3px 1px rgba(15, 164, 15, 0.453);
@@ -93,6 +116,21 @@ body {
   .todo__content {
     font-size: 1rem;
     flex-grow: 1;
+  }
+
+  .todo__item.completed .todo__content {
+    text-decoration: line-through;
+  }
+
+  .todo__remove {
+    background-color: rgb(223, 51, 51);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
   }
 }
 

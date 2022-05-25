@@ -22,21 +22,38 @@ body {
   flex-direction: column;
 }
 
-.todo__header {
-  flex: 1;
+.todo__form {
+  display: flex;
 }
-.todo__header input[type=text] {
+
+.todo__input {
   height: 50px;
-  width: 100%;
+  flex-grow: 1;
   border: none;
   outline: none;
   padding: 0 20px;
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.05);
   border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
 }
-.todo__header input[type=text]:focus {
+.todo__input:focus {
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.1);
+}
+.todo__input:focus + .todo__button-add {
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.1);
+}
+
+.todo__button-add {
+  height: 50px;
+  border: none;
+  border-top-right-radius: 3px;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.05);
+  padding: 0 20px;
+  background-color: rgb(58, 144, 201);
+  color: #fff;
+  cursor: pointer;
+}
+.todo__button-add:hover {
+  background-color: rgb(69, 155, 212);
 }
 
 .todo__list {
@@ -48,6 +65,9 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
+}
+.todo__list .todo__item + .todo__item {
+  margin-top: 10px;
 }
 .todo__list .todo__checkbox-wrapper {
   flex-shrink: 0;
@@ -82,6 +102,19 @@ body {
 .todo__list .todo__content {
   font-size: 1rem;
   flex-grow: 1;
+}
+.todo__list .todo__item.completed .todo__content {
+  text-decoration: line-through;
+}
+.todo__list .todo__remove {
+  background-color: rgb(223, 51, 51);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
 }
 
 .todo__footer {

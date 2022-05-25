@@ -1,17 +1,5 @@
-import Task from './task.js';
+import Controller from './Controller.js';
+import Model from './Model.js';
+import View from './View.js';
 
-class App {
-    constructor() {
-        this.bind();
-    }
-
-    bind() {
-        document.addEventListener('keyup', (e) => {
-            if ()
-        });
-    }
-
-    
-}
-
-new App();
+window.app = new Controller(new Model(), new View());
