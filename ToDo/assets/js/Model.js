@@ -17,7 +17,10 @@ export default class Model {
     }
     
     bindTodoListChanged(callback) {
-        this.onTodoListChanged = callback;
+        this.onTodoListChanged = () => {
+            this.saveTodos();
+            return callback;
+        }
     }
 
     addTodo(text) {
@@ -36,6 +39,7 @@ export default class Model {
         // this.todos.splice(todoIndex, 1);
         this.todos = this.todos.filter((todo) => todo.id != id);
         this.onTodoListChanged(this.todos);
+        saveTodos
     }
 
     toggleTodo(id) {
