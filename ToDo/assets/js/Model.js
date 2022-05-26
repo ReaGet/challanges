@@ -40,6 +40,16 @@ export default class Model {
         this.saveTodos();
     }
 
+    editTodo(id, text) {
+        this.todos.map((todo) => {
+            if (todo.id == id) {
+                todo.text = text;
+            }
+        });
+        this.onTodoListChanged(this.todos);
+        this.saveTodos();
+    }
+
     toggleTodo(id) {
         this.todos.map((todo) => {
             if (todo.id == id) {

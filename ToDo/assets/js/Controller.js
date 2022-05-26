@@ -8,6 +8,7 @@ export default class Controller {
         this.view.bindToAdd(this.handleAddTodo);
         this.view.bindToToggle(this.handleToggleTodo);
         this.view.bindToRemove(this.handleRemoveTodo);
+        this.view.bindToEdit(this.handleEditTodo);
     }
 
     onTodoListChanged = (todos) => {
@@ -20,6 +21,10 @@ export default class Controller {
 
     handleRemoveTodo = (id) => {
         this.model.removeTodo(id);
+    }
+
+    handleEditTodo = (id, text) => {
+        this.model.editTodo(id, text);
     }
 
     handleToggleTodo = (id) => {

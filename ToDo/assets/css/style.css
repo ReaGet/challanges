@@ -66,7 +66,7 @@ body {
 }
 .todo__list .todo__item {
   display: flex;
-  padding: 15px 20px;
+  padding: 5px 20px;
   align-items: center;
   flex-wrap: nowrap;
   border-bottom: 1px solid #efefef;
@@ -93,6 +93,7 @@ body {
 .todo__list .todo__checkbox:checked + .todo__label {
   border-color: rgba(77, 197, 77, 0.775);
   border-width: 2px;
+  box-shadow: 0 0 3px 1px rgba(15, 164, 15, 0.153);
 }
 .todo__list .todo__checkbox:checked + .todo__label:after {
   content: "";
@@ -107,9 +108,23 @@ body {
 .todo__list .todo__content {
   font-size: 1rem;
   flex-grow: 1;
+  padding: 11px 10px 11px 11px;
+}
+.todo__list .todo__content.editable {
+  padding: 0 10px 0 0;
+}
+.todo__list .todo__content .todo__edit {
+  outline: none;
+  border: 1px solid #f0f0f0;
+  padding: 10px;
+  width: 100%;
+  background-color: #f9f9f9;
 }
 .todo__list .todo__item.completed .todo__content {
   text-decoration: line-through;
+}
+.todo__list .todo__actions {
+  margin-left: auto;
 }
 .todo__list .todo__remove {
   background-color: rgb(223, 51, 51);

@@ -37,7 +37,7 @@ export default class View {
     bindToToggle(handler) {
         this.todoList.addEventListener('change', (event) => {
             if (event.target.type == 'checkbox') {
-                handler(event.target.dataset.id);
+                handler(event.target.closest('.todo__item').dataset.id);
             }
         }, true);
     }
@@ -45,9 +45,60 @@ export default class View {
     bindToRemove(handler) {
         this.todoList.addEventListener('click', (event) => {
             if (event.target.className.includes('todo__remove')) {
-                handler(event.target.dataset.id);
+                handler(event.target.closest('.todo__item').dataset.id);
             }
         }, true);
+    }
+
+    bindToEdit(handler) {
+        document.body.addEventListener('click', (event) => {
+            let content = event.target;
+            if (!content.className.includes('todo__content') &&
+                !content.closest('.todo__content')) {
+                this.hideEditableField();
+                return;
+            }
+            
+            if (!content.className.includes('editable') &&
+                !content.closest('.todo__content.editable')) {
+                this.hideEditableField();
+                this.showEditableField(content, handler);
+            } else {
+            }
+        });
+    }
+
+    showEditableField(content, handler) {
+        content.classList.add('editable');
+
+        let text = content.textContent;
+        let input = this.createElement('input', 'todo__edit');
+        let form = this.createElement('form', 'edit_form');
+        content.innerHTML = '';
+        input.value = text;
+        form.append(input);
+
+        content.append(form);
+
+        input.focus();
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            if (input.value) {
+                handler(event.target.closest('.todo__item').dataset.id, input.value);
+                this.hideEditableField();
+            }
+        });
+    }
+
+    hideEditableField(handler) {
+        let inputs = document.querySelectorAll('.todo__content.editable input');
+        [...inputs].map((input) => {
+            let text = input.value;
+            input.closest('.todo__content').classList.remove('editable');
+            input.closest('.todo__content').innerHTML = text;
+        });
     }
 
     createElement(tag, className) {
@@ -68,14 +119,14 @@ export default class View {
 
         todos.map((todo) => {
             let todoEl = `
-                <div class="todo__item ${todo.completed ? 'completed' : ''}">
+                <div class="todo__item ${todo.completed ? 'completed' : ''}" data-id="${todo.id}">
                     <div class="todo__checkbox-wrapper">
-                        <input type="checkbox" id="${todo.id}" data-id="${todo.id}" class="todo__checkbox" ${todo.completed ? 'checked' : ''}>
+                        <input type="checkbox" id="${todo.id}" class="todo__checkbox" ${todo.completed ? 'checked' : ''}>
                         <label for="${todo.id}" class="todo__label"></label>
                     </div>
                     <div class="todo__content">${todo.text}</div>
                     <div class="todo__actions">
-                        <div class="todo__remove" data-id="${todo.id}">x</div>
+                        <div class="todo__remove">x</div>
                     </div>
                 </div>
             `;
