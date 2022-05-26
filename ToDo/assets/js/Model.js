@@ -17,10 +17,7 @@ export default class Model {
     }
     
     bindTodoListChanged(callback) {
-        this.onTodoListChanged = () => {
-            this.saveTodos();
-            return callback;
-        }
+        this.onTodoListChanged = callback;
     }
 
     addTodo(text) {
@@ -32,6 +29,7 @@ export default class Model {
 
         this.todos.push(todo);
         this.onTodoListChanged(this.todos);
+        this.saveTodos();
     }
 
     removeTodo(id) {
@@ -39,7 +37,7 @@ export default class Model {
         // this.todos.splice(todoIndex, 1);
         this.todos = this.todos.filter((todo) => todo.id != id);
         this.onTodoListChanged(this.todos);
-        saveTodos
+        this.saveTodos();
     }
 
     toggleTodo(id) {
@@ -49,5 +47,6 @@ export default class Model {
             }
         });
         this.onTodoListChanged(this.todos);
+        this.saveTodos();
     }
 }

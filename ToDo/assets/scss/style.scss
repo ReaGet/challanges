@@ -35,6 +35,7 @@ body {
   outline: none;
   padding: 0 20px;
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .05);
+  z-index: 10;
   border-top-left-radius: 3px;
 
   &:focus {
@@ -53,6 +54,7 @@ body {
   border-top-right-radius: 3px;
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .05);
   padding: 0 20px;
+  z-index: 10;
   background-color: rgb(58, 144, 201);
   color: #fff;
   cursor: pointer;
@@ -63,17 +65,23 @@ body {
 }
 
 .todo__list {
-  padding: 20px;
   display: flex;
   flex-direction: column;
+  height: 300px;
+  overflow-y: auto;
 
   .todo__item {
     display: flex;
+    padding: 15px 20px;
     align-items: center;
     flex-wrap: nowrap;
+    border-bottom: 1px solid #efefef;
+
+    &.completed {
+      background-color: #fcfcfc;
+    }
 
     &+.todo__item {
-      margin-top: 10px;
     }
   }
 
